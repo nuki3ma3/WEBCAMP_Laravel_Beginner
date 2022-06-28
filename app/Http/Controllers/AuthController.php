@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    /**
+  /**
      * トップページ を表示する
      * 
      * @return \Illuminate\View\View
@@ -18,7 +18,6 @@ class AuthController extends Controller
     {
         return view('index');
     }
-
     /**
      * ログイン処理
      * 
