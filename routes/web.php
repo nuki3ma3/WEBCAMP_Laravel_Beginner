@@ -5,6 +5,8 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\CompletedTaskController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -19,6 +21,10 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+  // ユーザー登録システム
+    Route::get('/user/register', [UserController::class, 'index']);
+    Route::post('/user/register', [UserController::class, 'register']);
 
 // タスク管理システム
 Route::get('/', [AuthController::class, 'index'])->name('front.index');
@@ -35,7 +41,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/complete/{task_id}', [TaskController::class, 'complete'])->whereNumber('task_id')->name('complete');
         Route::get('/csv/download', [TaskController::class, 'csvDownload']);
     });
-    //
+    // 完了タスクリスト
+    Route::get('/completed_tasks/list', [CompletedTaskController::class, 'list']);
+    
+    
+   
+    
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 
@@ -57,3 +68,4 @@ Route::get('/welcome/second', [WelcomeController::class, 'second']);
 // form入力テスト用
 Route::get('/test', [TestController::class, 'index']);
 Route::post('/test/input', [TestController::class, 'input']);
+
